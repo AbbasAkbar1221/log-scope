@@ -3,7 +3,7 @@ const router = express.Router();
 const upload = require('../services/logIngestionService');  // Multer configuration for uploading
 const { processJsonLog, processCsvLog, processPlainLog } = require('../controllers/logController');  // Log processing methods
 const { searchLogs } = require('../services/searchService');  // Search service
-const Log = require('../models/logModel'); 
+
 
 // Upload logs
 router.post('/upload', upload.array('logs', 10), async (req, res) => {
@@ -40,7 +40,6 @@ router.get('/search', async (req, res) => {
   console.log('Request Query:', req.query);
     // Log the incoming query parameters
 
-
     try {
 
       const query = {};
@@ -68,7 +67,7 @@ router.get('/search', async (req, res) => {
       query.source = { $regex: req.query.source.trim(), $options: 'i' }; // Case-insensitive match
     }
     
-      console.log('Formatted Query:', query);
+    console.log('Formatted Query:', query);
 
     const logs = await searchLogs(query);  // Search logs using query parameters
     console.log('Found Logs:', logs);  // Log the result for debugging
