@@ -56,7 +56,7 @@ async function searchLogs(query) {
   console.log('Search query:', searchQuery);
 
     // Perform the MongoDB query
-    const logs = await Log.find(searchQuery).limit(10); // Limit results to 10 logs
+    const logs = await Log.find(searchQuery).sort({timestamp: -1}).limit(10); // Limit results to 10 logs
     console.log('Found Logs:', logs);
     return logs;
   } catch (error) {
