@@ -42,11 +42,6 @@ router.get('/search', async (req, res) => {
 
 
     try {
-      // const query = {
-      //   message: req.query.message,  
-      //   level: req.query.level,      
-      //   timestamp: req.query.timestamp     
-      // };
 
       const query = {};
 
@@ -84,53 +79,6 @@ router.get('/search', async (req, res) => {
     res.status(500).send('Error searching logs.');
   }
 });
-
-
-// router.get('/search', async (req, res) => {
-//   console.log('Request Query:', req.query);
-  
-//   // Extract query parameters (message, level, timestamp, page, limit)
-//   const { message, level, timestamp, page = 1, limit = 10 } = req.query;
-
-//   // Log the formatted query for debugging
-//   const query = {};
-//   if (message) query.message = { $text: { $search: message } };  // Full-text search on message
-//   if (level) query.level = level;
-//   if (timestamp) query.timestamp = { $gte: new Date(timestamp) };  // Filter by timestamp
-
-//   console.log('Formatted Query:', query);
-
-//   try {
-//     // Calculate pagination skip value based on the page number and limit
-//     const skip = (page - 1) * limit;
-
-//     // Fetch the logs with pagination (skip and limit)
-//     const logs = await Log.find(query) // Query the database using the formatted query
-//       .skip(skip)  // Skip the results based on the current page
-//       .limit(Number(limit))  // Limit the results per page
-//       .sort({ timestamp: -1 });  // Sort logs by timestamp in descending order (latest first)
-
-//     // Get the total count of logs that match the query for pagination
-//     const totalLogs = await Log.countDocuments(query);  // Total number of logs matching the query
-
-//     // Calculate the total number of pages
-//     const totalPages = Math.ceil(totalLogs / limit);
-
-//     console.log('Found Logs:', logs);  // Log the result for debugging
-
-//     // Return the logs along with pagination information
-//     res.json({
-//       logs,           // The logs for the current page
-//       totalLogs,      // Total number of logs that match the query
-//       totalPages,     // Total number of pages
-//       currentPage: page,  // The current page
-//       perPage: limit  // The number of logs per page
-//     });
-//   } catch (err) {
-//     console.error('Error searching logs:', err);
-//     res.status(500).send('Error searching logs.');
-//   }
-// });
 
 
 module.exports = router;

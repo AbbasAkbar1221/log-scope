@@ -130,6 +130,6 @@ async function processPlainLog(fileBuffer) {
 module.exports = {
     processJsonLog,
     processCsvLog,
-    processPlainLog,  // Ensure this is exported
+    processPlainLog,  
   };
   

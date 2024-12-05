@@ -1,4 +1,4 @@
-// models/logModel.js
+
 const mongoose = require('mongoose');
 
 // Log schema definition

@@ -22,16 +22,6 @@ async function searchLogs(query) {
       searchQuery.level = query.level.trim();  // No need for regex for exact match
     }
 
-    // if (query.timestamp && typeof query.timestamp === 'string' && query.timestamp.trim()) {
-    //   const parsedDate = new Date(query.timestamp.trim());
-    //   if (isNaN(parsedDate.getTime())) {
-    //     throw new Error("Invalid timestamp format");
-    //   }
-    //   searchQuery.timestamp = { $gte: parsedDate }; // Assuming you want logs from a certain date onwards
-    // } else {
-    //   console.log('Invalid timestamp query:', query.timestamp);
-    // }
-
     if (query.timestamp) {
       if (typeof query.timestamp === 'string' && query.timestamp.trim()) {
         // Parse the timestamp from the query
@@ -52,8 +42,6 @@ async function searchLogs(query) {
     
     
     
-    
-
    // Check and process the source
    if (query.source) {
     if (typeof query.source === 'string' && query.source.trim()) {
