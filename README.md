@@ -18,6 +18,7 @@ This project is a log processing and indexing system built using Node.js and Mon
 - **Database Storage**: Logs are stored in MongoDB with fields such as `timestamp`, `level`, `message`, `source`.
 - **Search and Indexing**: Efficiently search and filter logs in the database using timestamp ranges and other filters.
 - **File Upload**: Allows users to upload log files using `multer` and process them in various formats.
+-  **Pagination**: Implements pagination for search results, making it easier for users to navigate large datasets efficiently.
 
  ## ⚙️ Setup Instructions
  Follow these steps to set up the project locally on your machine and use Postman to interact with the API:
@@ -130,9 +131,7 @@ The system supports the following log formats:
 
 
 ## 🚀 Future Improvements
-- **Search Result Pagination**: Implement pagination for search results to optimize performance and user experience when working with large datasets. This will allow users to view results page by page, instead of loading all results at once.
 - **Search Result Highlighting**: Introduce search result highlighting, where the matched keywords or terms in the log entries are visually highlighted. This feature will help users quickly identify relevant information and improve the efficiency of reviewing search results.
-- **Log Visualization**:  Integrate data visualization tools (e.g., Chart.js, D3.js) to generate graphical representations of log data.
 - **User Authentication**: Implement authentication and authorization for users, allowing them to access logs securely and manage log data in a more controlled environment.
 - **Elasticsearch/Solr Integration**: Integrate the project with Elasticsearch or Solr for advanced search and indexing. This will significantly improve the search performance and scalability of the application, especially for large datasets.
 
