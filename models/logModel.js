@@ -2,7 +2,6 @@
 const mongoose = require('mongoose');
 
 // Log schema definition
-
 const logSchema = new mongoose.Schema({
   timestamp: { type: Date, required: true },
   level: { type: String, default: 'info' },

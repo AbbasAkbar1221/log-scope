@@ -18,6 +18,5 @@ function extractLogFields(log) {
     };
   }
   
-
 module.exports = { standardizeTimestamp, extractLogFields };
 

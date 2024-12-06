@@ -1,9 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const logRoutes = require('./routes/logRoutes');
-const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
+const express = require("express");
+const bodyParser = require("body-parser");
+const logRoutes = require("./routes/logRoutes");
+const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
 
 // Initialize Express app
 const app = express();
@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes for handling log-related operations
-app.use('/logs', logRoutes);
+app.use("/logs", logRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)

@@ -28,7 +28,6 @@ async function processJsonLog(fileBuffer) {
   
         // Standardize the timestamp if needed
         log.timestamp = standardizeTimestamp(log.timestamp);
-
        
         // Save the log
         await saveLog(log);
@@ -63,9 +62,6 @@ async function processCsvLog(fileBuffer) {
         // Extract relevant fields
         const logFields = extractLogFields(log);
 
-        
-         
-  
         // Save to database
         await saveLog(logFields);
   
@@ -78,9 +74,7 @@ async function processCsvLog(fileBuffer) {
     }
   }
 
-
 // Helper function to parse plain text log line
-
 async function processPlainLog(fileBuffer) {
     try {
       const logs = fileBuffer.toString('utf-8').split('\n');  // Split the file by newlines to handle each line as a log
@@ -90,11 +84,8 @@ async function processPlainLog(fileBuffer) {
           log.timestamp = standardizeTimestamp(log.timestamp);  // Standardize timestamp
           const logFields = extractLogFields(log);  // Extract relevant log fields
 
-         
-  
            console.log('Plain text log indexed:', log);  // Logging the index action
 
-           
           saveLog(logFields);  // Save processed log to storage
         }
       });

@@ -1,5 +1,4 @@
 
-
 function cleanMessage(message) {
     if (typeof message !== 'string') {
       console.error('Invalid message format:', message);

@@ -69,7 +69,7 @@ const LogUploadForm = () => {
         </p>
       )}
 
-      {/* Optional: Display list of selected files */}
+      {/* Display list of selected files */}
       {files.length > 0 && (
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Selected Files:</h3>

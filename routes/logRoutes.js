@@ -41,7 +41,6 @@ router.get('/search', async (req, res) => {
     // Log the incoming query parameters
 
     try {
-
       const query = {};
 
     // Check if message query parameter exists and is non-empty
@@ -69,7 +68,14 @@ router.get('/search', async (req, res) => {
     
     console.log('Formatted Query:', query);
 
-    const logs = await searchLogs(query);  // Search logs using query parameters
+     // Get limit and page parameters from the query string (with default values if not provided)
+     const limit = parseInt(req.query.limit) || 10;  // Default to 5 if no limit is provided
+     const page = parseInt(req.query.page) || 1;  // Default to page 1 if no page is provided
+ 
+     // Calculate offset based on the current page and limit
+     const offset = (page - 1) * limit;
+
+    const logs = await searchLogs(query, limit, offset);  // Search logs using query parameters
     console.log('Found Logs:', logs);  // Log the result for debugging
     res.json(logs);  // Return the found logs
      } catch (err) {
