@@ -87,7 +87,7 @@ To run the application locally, follow these steps:
 
       Click **Send** to retrieve the logs.
 
-## 📱 Frontend (React App)
+## 📱 Frontend (React App): Your Gateway to Seamless Log Analysis
 
 The React App serves as the user interface for interacting with the Log Analyzer backend. It allows users to upload log files, search and filter logs based on various criteria (level, source, message, timestamp), and view results dynamically.
 
