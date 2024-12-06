@@ -7,7 +7,10 @@ require("dotenv").config();
 
 // Initialize Express app
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+
 const port = process.env.PORT || 3000;
 
 // Middleware to parse incoming requests

@@ -62,7 +62,23 @@ async function searchLogs(query, limit, offset) {
 
     const totalPages = Math.ceil(totalLogs / limit);
     console.log("Found Logs:", logs);
-    // return logs;
+    const currentPage= Math.floor(offset / limit) + 1 // Current page (1-based index)
+
+     // Validate page number
+     if (currentPage > totalPages) {
+      return {
+        error: true,
+        message: `Page ${currentPage} does not exist. There are only ${totalPages} pages available.`,
+        logs: [],
+        pagination: {
+          totalLogs,
+          totalPages,
+          currentPage: null,
+          perPage: limit,
+        },
+      };
+    }
+
     // Return the logs and pagination metadata
     return {
       logs,
@@ -75,7 +91,6 @@ async function searchLogs(query, limit, offset) {
     };
   } catch (error) {
     console.error("Error searching logs:", error);
-    // return [];
     return { logs: [], pagination: {} };
   }
 }
