@@ -69,7 +69,7 @@ router.get('/search', async (req, res) => {
     console.log('Formatted Query:', query);
 
      // Get limit and page parameters from the query string (with default values if not provided)
-     const limit = parseInt(req.query.limit) || 10;  // Default to 5 if no limit is provided
+     const limit = parseInt(req.query.limit) || 10;  // Default to 10 if no limit is provided
      const page = parseInt(req.query.page) || 1;  // Default to page 1 if no page is provided
  
      // Calculate offset based on the current page and limit
