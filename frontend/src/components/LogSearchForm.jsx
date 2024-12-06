@@ -11,7 +11,7 @@ const LogSearchForm = () => {
   const [message, setMessage] = useState('');
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const [totalPages, setTotalPages] = useState(1); // Track the total number of pages
-  const logsPerPage = 5; // Set how many logs per page
+  const logsPerPage = 10; // Set how many logs per page
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
