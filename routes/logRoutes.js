@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../services/logIngestionService"); // Multer configuration for uploading
+const upload = require("../services/logIngestionService");
 const {
   processJsonLog,
   processCsvLog,
   processPlainLog,
-} = require("../controllers/logController"); // Log processing methods
-const { searchLogs } = require("../services/searchService"); // Search service
+} = require("../controllers/logController"); 
+const { searchLogs } = require("../services/searchService"); 
 
 // Upload logs
 router.post("/upload", upload.array("logs", 10), async (req, res) => {
@@ -23,19 +23,19 @@ router.post("/upload", upload.array("logs", 10), async (req, res) => {
           file.mimetype === "application/json" ||
           file.originalname.endsWith(".json")
         ) {
-          await processJsonLog(file.buffer); // Process JSON log from buffer
+          await processJsonLog(file.buffer);
         } else if (
           file.mimetype === "text/csv" ||
           file.originalname.endsWith(".csv")
         ) {
-          await processCsvLog(file.buffer); // Process CSV log from buffer
+          await processCsvLog(file.buffer); 
         } else if (
           file.mimetype === "text/plain" ||
           file.originalname.endsWith(".txt")
         ) {
-          await processPlainLog(file.buffer); // Process plain text log from buffer
+          await processPlainLog(file.buffer); 
         } else {
-          // If the file type is not supported, log an error
+          
           console.error("Unsupported file type:", file.mimetype);
           return res
             .status(400)
@@ -53,20 +53,17 @@ router.post("/upload", upload.array("logs", 10), async (req, res) => {
 
 router.get("/search", async (req, res) => {
   console.log("Request Query:", req.query);
-  // Log the incoming query parameters
 
   try {
-    // Get limit and page parameters from the query string (with default values if not provided)
-    const limit = parseInt(req.query.limit) || 10; // Default to 10 if no limit is provided
-    const page = parseInt(req.query.page) || 1; // Default to page 1 if no page is provided
-
-    // Calculate offset based on the current page and limit
+    
+    const limit = parseInt(req.query.limit) || 10; 
+    const page = parseInt(req.query.page) || 1; 
     const offset = (page - 1) * limit;
 
-    const logs = await searchLogs(req.query, limit, offset); // Search logs using query parameters
+    const logs = await searchLogs(req.query, limit, offset); 
 
-    console.log("Found Logs:", logs); // Log the result for debugging
-    res.json(logs); // Return the found logs
+    console.log("Found Logs:", logs); 
+    res.json(logs); 
   } catch (err) {
     console.error("Error searching logs:", err);
 

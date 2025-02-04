@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGODB_URI)
   })
   .catch((err) => {
     console.error('Failed to connect to MongoDB', err);
-    process.exit(1);  // Exit the process if MongoDB connection fails
+    process.exit(1);  
   });
 
 // Start server and listen for requests
