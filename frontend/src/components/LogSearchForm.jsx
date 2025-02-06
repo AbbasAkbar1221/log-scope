@@ -9,9 +9,11 @@ const LogSearchForm = () => {
   });
   const [logs, setLogs] = useState([]);
   const [message, setMessage] = useState('');
-  const [currentPage, setCurrentPage] = useState(1); // Track the current page
-  const [totalPages, setTotalPages] = useState(1); // Track the total number of pages
-  const logsPerPage = 10; // Set how many logs per page
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [totalPages, setTotalPages] = useState(1); 
+  const logsPerPage = 10; 
+
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +35,7 @@ const LogSearchForm = () => {
     const query = new URLSearchParams(searchParams).toString();
 
     try {
-      const response = await fetch(`http://localhost:4000/logs/search?${query}&page=${currentPage}&limit=${logsPerPage}`
+      const response = await fetch(`${backendURL}/logs/search?${query}&page=${currentPage}&limit=${logsPerPage}`
       );
       if (!response.ok) {
         throw new Error('Failed to fetch logs');
@@ -42,7 +44,7 @@ const LogSearchForm = () => {
       const result = await response.json();
       setLogs(result.logs);
       setMessage('Logs fetched successfully');
-      setTotalPages(result.pagination.totalPages); // Update total pages
+      setTotalPages(result.pagination.totalPages);
 
       
     } catch (error) {
@@ -51,7 +53,6 @@ const LogSearchForm = () => {
     }
   };
 
-   // Handle pagination buttons
    const handlePageChange = (newPage) => {
     if (newPage < 1 || newPage > totalPages) return;
     setCurrentPage(newPage);
@@ -59,7 +60,7 @@ const LogSearchForm = () => {
 
   useEffect(() => {
     if (currentPage) {
-      handleSearch(); // Trigger the search when the page is updated
+      handleSearch();
     }
   }, [currentPage]);
 
@@ -101,7 +102,7 @@ const LogSearchForm = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-600 font-medium">Source:</label> {/* Add source input */}
+          <label className="block text-gray-600 font-medium">Source:</label> 
           <input
             type="text"
             name="source"
@@ -138,7 +139,7 @@ const LogSearchForm = () => {
       ) : (
         <p className="mt-4 text-gray-500">No logs found.</p>
       )}
-       {/* Pagination Controls */}
+      
        <div className="flex justify-between mt-8">
         <button
           onClick={() => handlePageChange(currentPage - 1)}

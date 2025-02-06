@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 const LogUploadForm = () => {
   const [files, setFiles] = useState([]);
   const [message, setMessage] = useState('');
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
 
   const handleFileChange = (e) => {
-    const newFiles = [...files, ...Array.from(e.target.files)]; // Append new files to the current list
+    const newFiles = [...files, ...Array.from(e.target.files)];
     setFiles(newFiles);
   };
 
@@ -18,11 +19,11 @@ const LogUploadForm = () => {
 
     const formData = new FormData();
     files.forEach((file) => {
-      formData.append('logs', file); // Append each file to the FormData object
+      formData.append('logs', file); 
     });
 
     try {
-      const response = await fetch('http://localhost:4000/logs/upload', {
+      const response = await fetch(`${backendURL}/logs/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -48,7 +49,7 @@ const LogUploadForm = () => {
           <input
             type="file"
             onChange={handleFileChange}
-            multiple // Allow multiple file selection
+            multiple
             className="block w-full text-gray-700 bg-white border border-gray-300 rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
@@ -69,7 +70,6 @@ const LogUploadForm = () => {
         </p>
       )}
 
-      {/* Display list of selected files */}
       {files.length > 0 && (
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Selected Files:</h3>
