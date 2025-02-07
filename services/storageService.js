@@ -2,7 +2,7 @@
 function cleanMessage(message) {
     if (typeof message !== 'string') {
       console.error('Invalid message format:', message);
-      return ''; // Return empty string
+      return ''; 
     }
     return message.replace(/[^a-zA-Z0-9\s]/g, ''); // Remove special characters
   }

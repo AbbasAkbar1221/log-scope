@@ -50,7 +50,6 @@ async function searchLogs(query, limit, offset) {
     // Count total matching logs for pagination metadata
     const totalLogs = await Log.countDocuments(searchQuery); 
     const totalPages = Math.ceil(totalLogs / limit);
-    console.log("Found Logs:", logs);
     const currentPage= Math.floor(offset / limit) + 1 
 
      // Validate page number

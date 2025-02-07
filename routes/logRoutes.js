@@ -16,33 +16,27 @@ router.post("/upload", upload.array("logs", 10), async (req, res) => {
   }
 
   try {
-    // Process each file based on the MIME type or file extension
-    await Promise.all(
-      files.map(async (file) => {
-        if (
-          file.mimetype === "application/json" ||
-          file.originalname.endsWith(".json")
-        ) {
-          await processJsonLog(file.buffer);
-        } else if (
-          file.mimetype === "text/csv" ||
-          file.originalname.endsWith(".csv")
-        ) {
-          await processCsvLog(file.buffer); 
-        } else if (
-          file.mimetype === "text/plain" ||
-          file.originalname.endsWith(".txt")
-        ) {
-          await processPlainLog(file.buffer); 
-        } else {
-          
-          console.error("Unsupported file type:", file.mimetype);
-          return res
-            .status(400)
-            .send(`Unsupported file type: ${file.mimetype}`);
-        }
-      })
-    );
+    for (const file of files) {
+      if (
+        file.mimetype === "application/json" ||
+        file.originalname.endsWith(".json")
+      ) {
+        await processJsonLog(file.buffer);
+      } else if (
+        file.mimetype === "text/csv" ||
+        file.originalname.endsWith(".csv")
+      ) {
+        await processCsvLog(file.buffer);
+      } else if (
+        file.mimetype === "text/plain" ||
+        file.originalname.endsWith(".txt")
+      ) {
+        await processPlainLog(file.buffer);
+      } else {
+        console.error("Unsupported file type:", file.mimetype);
+        return res.status(400).send(`Unsupported file type: ${file.mimetype}`);
+      }
+    }
 
     res.send("Log files uploaded and processed successfully.");
   } catch (err) {
@@ -50,6 +44,7 @@ router.post("/upload", upload.array("logs", 10), async (req, res) => {
     res.status(500).send("Error processing log files.");
   }
 });
+
 
 router.get("/search", async (req, res) => {
   console.log("Request Query:", req.query);
